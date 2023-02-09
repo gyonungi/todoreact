@@ -39,13 +39,19 @@ export default function todoReducer(state = initialState, action) {
     }
 
     case TOGGLE_TODO: {
-      const { id } = action.payload;
+      
 
-  
+      const targetTodo = state.taskList;
 
       return {
         ...state,
+        [initialState]:{
+          ...state.taskList,
 
+          taskList:{
+            ...targetTodo,
+          completed: !targetTodo.completed},
+        },
       };
 
     }

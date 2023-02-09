@@ -21,7 +21,7 @@ export const Todo = ({ todo }) => {
           [styles.completed]: todo.completed,
         })}
       >
-        {todo.content}
+        {todo.value}
       </span>
     </li>
   );
