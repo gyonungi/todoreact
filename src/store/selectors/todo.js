@@ -1,6 +1,6 @@
 const todoSelector = (store) => store.todo;
 
-export const todoIdsSelector = (store) => todoSelector(store)?.allIds || [];
+export const todoIdsSelector = (store) => todoSelector(store)?.taskList || [];
 
 export const todoByIdSelector = (store, id) => {
   const todoStore = todoSelector(store);
@@ -9,7 +9,7 @@ export const todoByIdSelector = (store, id) => {
     return {};
   }
   
-  const todoItem = todoStore.byIds[id];
+  const todoItem = todoStore.taskList;
 
   return {
     ...todoItem,

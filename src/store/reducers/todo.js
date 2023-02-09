@@ -1,10 +1,26 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO,EDIT_STATUS } from "../actions/types/todo";
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO,FILTER_TODO } from "../actions/types/todo";
 
 // 1.
 export const initialState = {
-  allIds: [],
-  byIds: {},
+  taskList: [
+    {
+      id: 1,
+      value: "first task",
+      completed: true,
+    },
+    {
+      id: 2,
+      value: "two task",
+      completed: true,
+    },
+    {
+      id: 3,
+      value: "three task",
+      completed: false,
+    }
+  ],
 };
+
 
 // 2.
 export default function todoReducer(state = initialState, action) {
@@ -12,40 +28,24 @@ export default function todoReducer(state = initialState, action) {
     // 3.
     case ADD_TODO: {
       // 4.
-      const { id, content } = action.payload;
 
       // 5.
       return {
         ...state,
 
-        allIds: [...state.allIds, id],
-        
-        byIds: {
-          ...state.byIds,
-
-          [id]: {
-            content,
-            complete: false,
-          },
-        },
+        taskList: [...state.taskList],
+      
       };
     }
 
     case TOGGLE_TODO: {
       const { id } = action.payload;
 
-      const targetTodo = state.byIds[id];
+  
 
       return {
         ...state,
 
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            ...targetTodo,
-            completed: !targetTodo.completed,
-          },
-        },
       };
 
     }
@@ -54,14 +54,14 @@ export default function todoReducer(state = initialState, action) {
       
       return {
         ...state, 
-        allIds: state.allIds.filter(todo => todo.id !== action.id),
+        taskList: state.taskList.filter((item) => !item.id)
       };
 
 
-      case EDIT_STATUS: {
+      case FILTER_TODO: {
         return {
             ...state,
-            byIds: state.byIds.filter(todo => !todo.completed ),
+            taskList: state.taskList.filter((item) => !item.completed)
         }
       }
     default:

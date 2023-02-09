@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO,EDIT_STATUS } from "../types/todo";
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO,FILTER_TODO } from "../types/todo";
 
 let nextTodoId = 0;
 
@@ -23,6 +23,6 @@ export const deleteTodo = (id) => ({
 });
 
 export const editStatus  = (id) => ({
-  type: EDIT_STATUS,
+  type: FILTER_TODO,
   payload: { id },
 });

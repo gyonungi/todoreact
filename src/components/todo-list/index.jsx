@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { toggleTodo } from "../../store/actions/creators/todo";
+
 import { todosSelector } from "../../store/selectors/todo";
 import { Todo } from "../todo";
 
