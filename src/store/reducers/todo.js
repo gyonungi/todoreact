@@ -25,43 +25,37 @@ export const initialState = {
 // 2.
 export default function todoReducer(state = initialState, action) {
   switch (action.type) {
-    // 3.
-    case ADD_TODO: {
-      // 4.
 
-      // 5.
+    case ADD_TODO: {
+ 
+
+  
+
       return {
         ...state,
 
-        taskList: [...state.taskList],
+        taskList: [...state.taskList,action.payload],
       
       };
     }
 
     case TOGGLE_TODO: {
       
+      const stateCopy = JSON.parse(JSON.stringify(state));
 
-      const targetTodo = state.taskList;
-
+       const targetTodoIndex = stateCopy.taskList.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      stateCopy.taskList[targetTodoIndex].completed =
+        !stateCopy.taskList[targetTodoIndex].completed;
       return {
-        ...state,
-        [initialState]:{
-          ...state.taskList,
-
-          taskList:{
-            ...targetTodo,
-          completed: !targetTodo.completed},
-        },
-      };
+        ...stateCopy,
 
     }
-
+  }
     case DELETE_TODO:
       
-      return {
-        ...state, 
-        taskList: state.taskList.filter((item) => !item.id)
-      };
+    return state.taskList.filter(item => item.id !== action.payload.id);
 
 
       case FILTER_TODO: {

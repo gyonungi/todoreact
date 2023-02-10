@@ -3,10 +3,12 @@ import { ADD_TODO, TOGGLE_TODO, DELETE_TODO,FILTER_TODO } from "../types/todo";
 let nextTodoId = 0;
 
 
-export const addTodo = (content) => ({
+export const addTodo = (value) => ({
   type: ADD_TODO,
   payload: {
-    id: ++nextTodoId,
+    id: nextTodoId++,
+    value:value,
+    completed: false,
   },
 });
 
@@ -17,9 +19,7 @@ export const toggleTodo = (id) => ({
 
 export const deleteTodo = (id) => ({
   type: DELETE_TODO,
-  payload: { 
-    id: id,
-  },
+  payload: { id },
 });
 
 export const editStatus  = (id) => ({
